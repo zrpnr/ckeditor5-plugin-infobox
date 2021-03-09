@@ -19,8 +19,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'drupalmedia.js',
-    library: ['CKEditor5', 'drupalMedia'],
+    filename: 'infobox.js',
+    library: ['CKEditor5', 'infoBox'],
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
