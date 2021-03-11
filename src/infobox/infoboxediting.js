@@ -22,6 +22,7 @@ export default class InfoBoxEditing extends Plugin {
     schema.register('infoBox', {
       isObject: true,
       allowWhere: '$block',
+      allowAttributes: ['label', 'modifier']
     });
 
     schema.register('infoBoxDesc', {
@@ -50,20 +51,22 @@ export default class InfoBoxEditing extends Plugin {
 
     conversion.for('dataDowncast').elementToElement({
       model: 'infoBox',
-      view: {
-        name: 'section',
-        classes: 'info-box'
-      }
+      view: (modelElement, { writer: viewWriter }) => (
+        viewWriter.createContainerElement('section', {
+          class: `info-box info-box--${modelElement.getAttribute('modifier')}`,
+        })
+      )
     });
-
     conversion.for('editingDowncast').elementToElement({
       model: 'infoBox',
       view: (modelElement, { writer: viewWriter }) => {
+        const label = modelElement.getAttribute('label');
         const section = viewWriter.createContainerElement('section', {
-          class: 'info-box',
+          class: `info-box info-box--${modelElement.getAttribute('modifier')}`,
+          'data-label': label
         });
 
-        return toWidget(section, viewWriter, { label: 'info box' });
+        return toWidget(section, viewWriter, { label });
       }
     });
 

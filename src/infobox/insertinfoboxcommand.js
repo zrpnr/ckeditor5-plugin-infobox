@@ -21,9 +21,8 @@ export default class InsertInfoBoxCommand extends Command {
 }
 
 function createInfoBox(writer, options) {
-  const infoBox = writer.createElement('infoBox');
-  console.log(`creating ${options.label}`);
-  const infoBoxDesc = writer.createElement('infoBoxDesc', { class: `info-box--${options.modifier}`, custom: 'foo' });
+  const infoBox = writer.createElement('infoBox', options);
+  const infoBoxDesc = writer.createElement('infoBoxDesc');
   console.log(infoBoxDesc.getAttributes());
   writer.append(infoBoxDesc, infoBox);
 
