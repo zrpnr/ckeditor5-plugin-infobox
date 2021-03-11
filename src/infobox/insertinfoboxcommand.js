@@ -1,10 +1,10 @@
 import { Command } from 'ckeditor5/src/core';
 
 export default class InsertInfoBoxCommand extends Command {
-  execute() {
+  execute(listItem) {
     const { model } = this.editor;
     model.change((writer) => {
-      model.insertContent(createInfoBox(writer));
+      model.insertContent(createInfoBox(writer, listItem));
     })
   }
 
@@ -20,10 +20,11 @@ export default class InsertInfoBoxCommand extends Command {
   }
 }
 
-function createInfoBox(writer) {
+function createInfoBox(writer, options) {
   const infoBox = writer.createElement('infoBox');
-  const infoBoxDesc = writer.createElement('infoBoxDesc');
-
+  console.log(`creating ${options.label}`);
+  const infoBoxDesc = writer.createElement('infoBoxDesc', { class: `info-box--${options.modifier}`, custom: 'foo' });
+  console.log(infoBoxDesc.getAttributes());
   writer.append(infoBoxDesc, infoBox);
 
   return infoBox;
