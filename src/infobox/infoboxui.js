@@ -6,21 +6,7 @@ export default class InfoBoxUI extends Plugin {
   init() {
 
     const editor = this.editor;
-
-    const demoGroup = [
-      {
-        label: 'Notice',
-        modifier: 'notice'
-      },
-      {
-        label: 'Warning',
-        modifier: 'warning'
-      },
-      {
-        label: 'Error',
-        modifier: 'error'
-      }
-    ];
+    const boxGroup = this.editor.config.get('infoBox');
 
     editor.ui.componentFactory.add('infoBox', (locale) => {
       const command = editor.commands.get('insertInfoBox');
@@ -41,7 +27,7 @@ export default class InfoBoxUI extends Plugin {
         editor.editing.view.focus();
       });
 
-      addListToDropdown(dropdownView, this._getListDefinitions(demoGroup));
+      addListToDropdown(dropdownView, this._getListDefinitions(boxGroup));
 
       return dropdownView;
     });
